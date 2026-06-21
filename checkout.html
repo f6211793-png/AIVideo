@@ -96,6 +96,25 @@
     .pay-method { background: #ffffff !important; }
     .mini-text strong { color: #0f172a !important; }
   </style>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1058415430082501');
+  fbq('track', 'PageView');
+  fbq('track', 'InitiateCheckout');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1058415430082501&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
   <header>
@@ -305,7 +324,7 @@
         formData.append('Upsell Selected', 'No');
 
         // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzH9UtFL5YzcILNvP7Ec3r-Nb_kfGgn9HshSsuPe2IWr2XcWhc0r9a9p9s6GD5BnhFU4A/exec';
 
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
