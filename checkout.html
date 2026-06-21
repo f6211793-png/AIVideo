@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Enroll Now — AIBootcampPakistan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #ffffff; --bg2: #f8fafc; --or: #F97316; --or2: #ea580c; --gn: #10b981; --text: #0f172a; --muted: #64748b; --border: rgba(0,0,0,0.1); --glass: rgba(0,0,0,0.02); }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
+
+    /* Header */
+    header{padding:18px 28px;background:rgba(13,15,31,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;justify-content:center}
+    .header-logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.15rem}
+    .header-logo img{height:30px}
+    .header-logo span{color:var(--or)}
+
+    /* Layout */
+    main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:40px 24px 60px;gap:32px;flex-wrap:wrap}
+    .checkout-left{flex:1;min-width:300px;max-width:520px}
+    .checkout-right{width:320px;flex-shrink:0}
+
+    /* Card */
+    .card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px}
+
+    /* Order Summary */
+    .order-label{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--or);margin-bottom:16px}
+    .order-title{font-size:1rem;font-weight:800;color:#fff;margin-bottom:4px}
+    .order-sub{font-size:.78rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
+    .order-line{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:.85rem}
+    .order-line:last-child{border-bottom:none}
+    .order-line .orig{text-decoration:line-through;color:var(--muted);font-size:.75rem}
+    .order-total{font-size:1.3rem;font-weight:900;color:var(--or)}
+    .order-save{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);border-radius:6px;padding:8px 14px;font-size:.78rem;color:var(--gn);font-weight:700;text-align:center;margin-top:14px}
+
+    /* Includes */
+    .include-item{display:flex;align-items:center;gap:10px;font-size:.8rem;color:var(--muted);margin-bottom:8px}
+    .include-item::before{content:'✓';color:var(--gn);font-weight:800;flex-shrink:0}
+
+    /* Form */
+    .form-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:6px}
+    .form-sub{font-size:.8rem;color:var(--muted);margin-bottom:20px}
+    .field{margin-bottom:16px}
+    label{display:block;font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:6px}
+    input,select{width:100%;padding:12px 14px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;color:#fff;font-size:.88rem;font-family:inherit;outline:none;transition:border-color .2s}
+    input::placeholder{color:var(--muted)}
+    input:focus,select:focus{border-color:rgba(249,115,22,.5);box-shadow:0 0 0 3px rgba(249,115,22,.08)}
+    select option{background:#1a1a2e}
+
+    /* Payment methods */
+    .pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+    .pay-method{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;cursor:pointer;transition:all .2s}
+    .pay-method.active{border-color:var(--or);background:rgba(249,115,22,.05)}
+    .pay-method-icon{font-size:1.4rem;margin-bottom:4px}
+    .pay-method-name{font-size:.72rem;font-weight:700;color:var(--text)}
+    .pay-method-num{font-size:.68rem;color:var(--muted);margin-top:2px}
+
+    /* Submit btn */
+    .btn-submit{width:100%;padding:16px;background:var(--or);color:#fff;font-weight:800;font-size:1.05rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 4px 20px rgba(249,115,22,.3);position:relative;overflow:hidden}
+    .btn-submit:hover{background:var(--or2);transform:scale(1.01);box-shadow:0 6px 28px rgba(249,115,22,.45)}
+    .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .secure-note{display:flex;align-items:center;justify-content:center;gap:6px;font-size:.72rem;color:var(--muted);margin-top:10px}
+
+    /* Success */
+    .success-box{display:none;text-align:center;padding:40px 20px}
+    .success-icon{font-size:3.5rem;margin-bottom:16px}
+    .success-title{font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:8px}
+    .success-sub{font-size:.88rem;color:var(--muted);line-height:1.6}
+
+    /* Trust badges */
+    .trust-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .trust-badge{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:5px}
+    .trust-badge span{color:var(--gn)}
+
+    /* Urgency */
+    .urgency-box{background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:14px;text-align:center;margin-bottom:20px}
+    .urgency-title{font-size:.82rem;font-weight:800;color:var(--or);margin-bottom:4px}
+    .urgency-sub{font-size:.72rem;color:var(--muted)}
+
+    /* Testimonial */
+    .mini-testi{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start}
+    .mini-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--or),var(--or2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;color:#fff;flex-shrink:0}
+    .mini-text{font-size:.75rem;color:var(--muted);line-height:1.5}
+    .mini-text strong{color:#fff}
+    .mini-earn{font-size:.7rem;font-weight:800;color:var(--or);margin-top:4px}
+
+    @media(max-width:768px){main{padding:24px 16px 60px;gap:20px}.checkout-right{width:100%}}
+    /* LIGHT THEME OVERRIDES */
+    .order-title, .form-title, .success-title, .urgency-title, .header-logo, .order-line span { color: #0f172a !important; }
+    .header-logo span { color: var(--or); }
+    .card, .success-box, .mini-testi, header { background: #ffffff !important; border: 1px solid var(--border) !important; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    input, select { color: #0f172a !important; background: rgba(0,0,0,0.03) !important; border: 1px solid var(--border) !important; }
+    .pay-method { background: #ffffff !important; }
+    .mini-text strong { color: #0f172a !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="header-logo">
+      <img src="logo.png" alt="AIBootcampPakistan Logo">
+      <span>AI</span>BootcampPakistan
+    </a>
+  </header>
+
+  <main>
+    <!-- LEFT: FORM -->
+    <div class="checkout-left">
+      <div class="card">
+        <div class="form-title">🔐 Secure Your Spot Now</div>
+        <div class="form-sub">Fill in your details below to join Pakistan's #1 AI Creative Bootcamp.</div>
+
+        <form id="checkoutForm" onsubmit="handleSubmit(event)">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Ali Khan">
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required placeholder="ali@example.com">
+          </div>
+          <div class="field">
+            <label for="phone">WhatsApp Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="03001234567">
+          </div>
+          <div class="field">
+            <label for="city">City</label>
+            <select id="city" name="city">
+              <option value="">Select your city</option>
+              <option>Karachi</option><option>Lahore</option><option>Islamabad</option>
+              <option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option>
+              <option>Peshawar</option><option>Quetta</option><option>Sialkot</option>
+              <option>Gujranwala</option><option>Hyderabad</option><option>Other</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <label style="margin-bottom:10px;display:block">Select Payment Method</label>
+            <div class="pay-methods">
+              <div class="pay-method active" onclick="selectPay(this,'jazzcash')">
+                <div class="pay-method-icon">📱</div>
+                <div class="pay-method-name">JazzCash</div>
+                <div class="pay-method-num">03XX XXXXXXX</div>
+              </div>
+              <div class="pay-method" onclick="selectPay(this,'easypaisa')">
+                <div class="pay-method-icon">💚</div>
+                <div class="pay-method-name">EasyPaisa</div>
+                <div class="pay-method-num">03459233954<br><span style="font-size:0.6rem">Syed Taimoor Shah</span></div>
+              </div>
+              <div class="pay-method" onclick="selectPay(this,'bank')">
+                <div class="pay-method-icon">🏦</div>
+                <div class="pay-method-name">Bank Transfer</div>
+                <div class="pay-method-num">HBL / Meezan</div>
+              </div>
+              <div class="pay-method" onclick="selectPay(this,'crypto')">
+                <div class="pay-method-icon">₿</div>
+                <div class="pay-method-name">Crypto / USDT</div>
+                <div class="pay-method-num">TRC20 / ERC20</div>
+              </div>
+            </div>
+            <input type="hidden" id="paymentMethod" value="jazzcash">
+          </div>
+
+          <div class="field">
+            <label for="txn">Transaction ID / Reference Number</label>
+            <input type="text" id="txn" name="txn" placeholder="After sending payment, paste your Txn ID here">
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn">
+            ✅ Complete Enrollment — Rs. 1,999 Only →
+          </button>
+          <div class="secure-note">
+            🔒 <span>Secure & Encrypted · Verified on WhatsApp within 1 hour</span>
+          </div>
+        </form>
+
+        <!-- SUCCESS STATE -->
+        <div class="success-box" id="successBox">
+          <div class="success-icon">🎉</div>
+          <div class="success-title">Enrollment Submitted!</div>
+          <div class="success-sub">
+            Thank you! Your enrollment has been received.<br><br>
+            Our team will verify your payment and send you access within <strong style="color:var(--or)">1 hour</strong> on WhatsApp.<br><br>
+            Please make sure your WhatsApp number is active.
+          </div>
+          <a href="https://wa.me/923180298090" target="_blank" style="display:inline-block;margin-top:24px;background:var(--gn);color:#000;padding:12px 24px;border-radius:8px;font-weight:800">
+            💬 Chat on WhatsApp →
+          </a>
+        </div>
+      </div>
+
+      <div class="trust-row">
+        <div class="trust-badge"><span>✓</span> Instant Access After Verification</div>
+        <div class="trust-badge"><span>✓</span> Private Community Access</div>
+        <div class="trust-badge"><span>✓</span> Free Bonus Ebook</div>
+        <div class="trust-badge"><span>✓</span> WhatsApp Support</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: SUMMARY -->
+    <div class="checkout-right">
+
+      <div class="urgency-box">
+        <div class="urgency-title">🔥 Only 3 Spots Left at This Price!</div>
+        <div class="urgency-sub">Price goes to Rs. 14,999 after 300 students.</div>
+      </div>
+
+      <div class="card">
+        <div class="order-label">Order Summary</div>
+        <div class="order-title">AIBootcampPakistan — Full Access</div>
+        <div class="order-sub">9 Modules + Bonus Ebook + Private Community + WhatsApp Support</div>
+        <div class="order-line">
+          <span>Regular Price</span>
+          <span class="orig">Rs. 14,999</span>
+        </div>
+        <div class="order-line">
+          <span>Launch Discount</span>
+          <span style="color:var(--gn);font-weight:700">– Rs. 13,000</span>
+        </div>
+        <div class="order-line" style="border-bottom:none">
+          <span style="font-weight:800;color:#fff">You Pay Today</span>
+          <span class="order-total">Rs. 1,999</span>
+        </div>
+        <div class="order-save">🎉 You save Rs. 13,000 — That's 87% off!</div>
+      </div>
+
+      <div class="card">
+        <div class="order-label" style="margin-bottom:12px">What's Included</div>
+        <div class="include-item">9 Comprehensive Modules</div>
+        <div class="include-item">Free Client Acquisition Ebook ($49 value)</div>
+        <div class="include-item">Private Community Access (Skool)</div>
+        <div class="include-item">WhatsApp Support Group</div>
+        <div class="include-item">USD Payment Guide for Pakistan</div>
+        <div class="include-item">50 Ready-to-Use AI Prompts</div>
+        <div class="include-item">Secret Cost Hack (saves $70+/mo)</div>
+        <div class="include-item">Lifetime Access to All Updates</div>
+      </div>
+
+      <div class="mini-testi">
+        <div class="mini-av">A</div>
+        <div>
+          <div class="mini-text"><strong>Ahmed K.</strong> from Lahore said: "I enrolled, completed Module 7, built a faceless page, and landed a <strong>£1,200 UK brand deal</strong> in week 9."</div>
+          <div class="mini-earn">💰 £1,200 UK brand deal · Week 9*</div>
+        </div>
+      </div>
+
+      <p style="font-size:.65rem;color:var(--muted);margin-top:10px;text-align:center;line-height:1.5">*Results not typical. Most students earn significantly less or nothing.</p>
+    </div>
+  </main>
+
+  <script>
+    let selectedPay = 'jazzcash';
+    function selectPay(el, method) {
+      document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
+      el.classList.add('active');
+      selectedPay = method;
+      document.getElementById('paymentMethod').value = method;
+    }
+
+    // Helper to get cookies for fbp and fbc
+    function getCookie(name) {
+      let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      if (match) return match[2];
+      return '';
+    }
+
+    // Helper to generate an Event ID
+    function generateEventId() {
+      return 'evt_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      try {
+        const formData = new FormData(document.getElementById('checkoutForm'));
+        formData.append('paymentMethod', document.getElementById('paymentMethod').value);
+
+        // Fetch IP address
+        let ip = '';
+        try {
+          const ipResponse = await fetch('https://api.ipify.org?format=json');
+          const ipData = await ipResponse.json();
+          ip = ipData.ip;
+        } catch (err) { console.warn("Could not fetch IP"); }
+
+        // Append FB CAPI required fields
+        formData.append('Event ID', generateEventId());
+        formData.append('URL', window.location.href);
+        formData.append('Traffic Type', '');
+        formData.append('fbc', getCookie('_fbc'));
+        formData.append('fbp', getCookie('_fbp'));
+        formData.append('Pixel Status', '');
+        formData.append('Hashed Phone', ''); // Apps script will hash it
+        formData.append('Conversion Name', 'Purchase');
+        formData.append('CAPI Status', '');
+        formData.append('UA', navigator.userAgent);
+        formData.append('IP', ip);
+        formData.append('Value', '1999');
+        formData.append('Upsell Selected', 'No');
+
+        // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        });
+
+        document.getElementById('checkoutForm').style.display = 'none';
+        document.getElementById('successBox').style.display = 'block';
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = '✅ Complete Enrollment — Rs. 1,999 Only →';
+        alert('There was an error. Please try again.');
+      }
+    }
+  </script>
+</body>
+</html>
