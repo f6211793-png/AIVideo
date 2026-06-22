@@ -95,6 +95,15 @@
     input, select { color: #0f172a !important; background: rgba(0,0,0,0.03) !important; border: 1px solid var(--border) !important; }
     .pay-method { background: #ffffff !important; }
     .mini-text strong { color: #0f172a !important; }
+
+    /* ORDER BUMP */
+    .bump-box{background:#111827 !important;border:2px dashed var(--or);border-radius:12px;padding:16px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;cursor:pointer}
+    .bump-box input[type="checkbox"]{width:22px;height:22px;margin-top:2px;accent-color:var(--or);cursor:pointer;flex-shrink:0}
+    .bump-content{flex-grow:1}
+    .bump-badge{display:inline-block;background:var(--or);color:#fff;font-size:.65rem;font-weight:900;text-transform:uppercase;padding:4px 8px;border-radius:4px;letter-spacing:1px;margin-bottom:8px}
+    .bump-title{font-size:1rem;font-weight:900;color:#fff !important;margin-bottom:6px;line-height:1.2}
+    .bump-desc{font-size:.8rem;color:#9ca3af !important;line-height:1.5;margin-bottom:8px}
+    .bump-price{font-size:.85rem;font-weight:900;color:var(--or) !important}
   </style>
 
   <!-- Meta Pixel Code -->
@@ -182,7 +191,7 @@
           </div>
 
           <button type="submit" class="btn-submit" id="submitBtn">
-            ✅ Complete Enrollment — Rs. 1,999 Only →
+            ✅ Complete Enrollment — Rs. 1,200 Only →
           </button>
           <div class="secure-note">
             🔒 <span>Secure & Encrypted · Verified on WhatsApp within 1 hour</span>
@@ -230,14 +239,25 @@
         </div>
         <div class="order-line">
           <span>Launch Discount</span>
-          <span style="color:var(--gn);font-weight:700">– Rs. 13,000</span>
+          <span style="color:var(--gn);font-weight:700">– Rs. 13,799</span>
         </div>
         <div class="order-line" style="border-bottom:none">
           <span style="font-weight:800;color:#fff">You Pay Today</span>
-          <span class="order-total">Rs. 1,999</span>
+          <span class="order-total">Rs. 1,200</span>
         </div>
-        <div class="order-save">🎉 You save Rs. 13,000 — That's 87% off!</div>
+        <div class="order-save">✅ You save Rs. 13,799 - That's 92% off!</div>
       </div>
+
+      <!-- ORDER BUMP -->
+      <label class="bump-box" for="bumpCheck">
+        <input type="checkbox" id="bumpCheck" onchange="toggleBump(this.checked)">
+        <div class="bump-content">
+          <div class="bump-badge">Special Upgrade</div>
+          <div class="bump-title">Add the AI Creator's Cheat Code Vault</div>
+          <div class="bump-desc">Get 50+ hyper-realistic Midjourney prompts, 5 premade HD characters, client outreach scripts, and Fiverr/Upwork gig blueprints. Save 85% today!</div>
+          <div class="bump-price">+ Rs. 499 (Only Rs. 1,699 Total)</div>
+        </div>
+      </label>
 
       <div class="card">
         <div class="order-label" style="margin-bottom:12px">What's Included</div>
@@ -265,11 +285,26 @@
 
   <script>
     let selectedPay = 'jazzcash';
+    let bumpSelected = false;
+
     function selectPay(el, method) {
       document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
       el.classList.add('active');
       selectedPay = method;
       document.getElementById('paymentMethod').value = method;
+    }
+
+    function toggleBump(isChecked) {
+      bumpSelected = isChecked;
+      const totalEl = document.querySelector('.order-total');
+      const submitBtn = document.getElementById('submitBtn');
+      if(isChecked) {
+        totalEl.textContent = 'Rs. 1,699';
+        submitBtn.innerHTML = '✅ Complete Enrollment &mdash; Rs. 1,699 Only &rarr;';
+      } else {
+        totalEl.textContent = 'Rs. 1,200';
+        submitBtn.innerHTML = '✅ Complete Enrollment &mdash; Rs. 1,200 Only &rarr;';
+      }
     }
 
     // Helper to get cookies for fbp and fbc
@@ -314,8 +349,8 @@
         formData.append('CAPI Status', '');
         formData.append('UA', navigator.userAgent);
         formData.append('IP', ip);
-        formData.append('Value', '1999');
-        formData.append('Upsell Selected', 'No');
+        formData.append('Value', bumpSelected ? '1699' : '1200');
+        formData.append('Upsell Selected', bumpSelected ? 'Yes' : 'No');
 
         // Convert formData to URLSearchParams to ensure Google Apps Script parses it correctly
         const searchParams = new URLSearchParams();
@@ -337,10 +372,11 @@
 
       } catch (err) {
         btn.disabled = false;
-        btn.textContent = '✅ Complete Enrollment — Rs. 1,999 Only →';
+        btn.textContent = '✅ Complete Enrollment — Rs. 1,200 Only →';
         alert('There was an error. Please try again.');
       }
     }
   </script>
 </body>
 </html>
+
