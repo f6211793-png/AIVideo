@@ -191,7 +191,7 @@
           </div>
 
           <button type="submit" class="btn-submit" id="submitBtn">
-            ✅ Complete Enrollment — Rs. 1,200 Only →
+            ✅ Complete Enrollment — Rs. 1,499 Only →
           </button>
           <div class="secure-note">
             🔒 <span>Secure & Encrypted · Verified on WhatsApp within 1 hour</span>
@@ -243,7 +243,7 @@
         </div>
         <div class="order-line" style="border-bottom:none">
           <span style="font-weight:800;color:#fff">You Pay Today</span>
-          <span class="order-total">Rs. 1,200</span>
+          <span class="order-total">Rs. 1,499</span>
         </div>
         <div class="order-save">✅ You save Rs. 13,799 - That's 92% off!</div>
       </div>
@@ -255,7 +255,7 @@
           <div class="bump-badge">Special Upgrade</div>
           <div class="bump-title">Add the AI Creator's Cheat Code Vault</div>
           <div class="bump-desc">Get 50+ hyper-realistic Midjourney prompts, 5 premade HD characters, client outreach scripts, and Fiverr/Upwork gig blueprints. Save 85% today!</div>
-          <div class="bump-price">+ Rs. 499 (Only Rs. 1,699 Total)</div>
+          <div class="bump-price">+ Rs. 499 (Only Rs. 1,998 Total)</div>
         </div>
       </label>
 
@@ -299,11 +299,11 @@
       const totalEl = document.querySelector('.order-total');
       const submitBtn = document.getElementById('submitBtn');
       if(isChecked) {
-        totalEl.textContent = 'Rs. 1,699';
-        submitBtn.innerHTML = '✅ Complete Enrollment &mdash; Rs. 1,699 Only &rarr;';
+        totalEl.textContent = 'Rs. 1,998';
+        submitBtn.innerHTML = '✅ Complete Enrollment &mdash; Rs. 1,998 Only &rarr;';
       } else {
-        totalEl.textContent = 'Rs. 1,200';
-        submitBtn.innerHTML = '✅ Complete Enrollment &mdash; Rs. 1,200 Only &rarr;';
+        totalEl.textContent = 'Rs. 1,499';
+        submitBtn.innerHTML = '✅ Complete Enrollment &mdash; Rs. 1,499 Only &rarr;';
       }
     }
 
@@ -349,7 +349,7 @@
         formData.append('CAPI Status', '');
         formData.append('UA', navigator.userAgent);
         formData.append('IP', ip);
-        formData.append('Value', bumpSelected ? '1699' : '1200');
+        formData.append('Value', bumpSelected ? '1699' : '1499');
         formData.append('Upsell Selected', bumpSelected ? 'Yes' : 'No');
 
         // Convert formData to URLSearchParams to ensure Google Apps Script parses it correctly
@@ -361,24 +361,27 @@
         // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMioWbwUHpRGQiW7VotlyFYAyoJHaO4RFEkiphc_2CdxL_Ogpacwl5XrIH4suWFDhMkw/exec';
 
-        await fetch(GOOGLE_SCRIPT_URL, {
+        // Fire and forget — don't wait for Google Script response
+        fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           body: searchParams,
           mode: 'no-cors'
         });
 
+        // Show success immediately without waiting
         document.getElementById('checkoutForm').style.display = 'none';
         document.getElementById('successBox').style.display = 'block';
 
       } catch (err) {
         btn.disabled = false;
-        btn.textContent = '✅ Complete Enrollment — Rs. 1,200 Only →';
+        btn.textContent = '✅ Complete Enrollment — Rs. 1,499 Only →';
         alert('There was an error. Please try again.');
       }
     }
   </script>
 </body>
 </html>
+
 
 
 
